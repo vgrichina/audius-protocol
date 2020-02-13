@@ -25,6 +25,7 @@ docker rm -f audius_ganache_cli_eth_contracts_test
 
 # echo commands from here out
 # useful to know what the test script is actually doing
+# -l 8000000: block gas limit (https://hub.docker.com/r/trufflesuite/ganache-cli/)
 set -x
 docker run --name audius_ganache_cli_eth_contracts_test -d -p 8556:8545 trufflesuite/ganache-cli:latest -h 0.0.0.0 -l 8000000
 

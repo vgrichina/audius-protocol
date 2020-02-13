@@ -19,9 +19,13 @@ export logLevel='info'
 # fail, so we check if it is installed first.
 # In CircleCI, the docker environment variables set up audius_creator_node_test instead of
 # audius_creator_node.
+
+docker-compose -f ../docker-compose/docker-compose.full.yml -p audius-creator-node-db-test up --build -d
+docker exec -it audius-creator-node-db-test_db_1 /bin/sh
+
 if [ -x "$(command -v psql)" ]; then
   # taken from https://stackoverflow.com/a/36591842
-  psql -U postgres -h localhost -p $PG_PORT -tc "SELECT 1 FROM pg_database WHERE datname = 'audius_creator_node_test'" | grep -q 1 || psql -U postgres -h localhost -p $PG_PORT -c "CREATE DATABASE audius_creator_node_test"
+  docker exec -it psql -U postgres -h localhost -p $PG_PORT -tc "SELECT 1 FROM pg_database WHERE datname = 'audius_creator_node_test'" | grep -q 1 || psql -U postgres -h localhost -p $PG_PORT -c "CREATE DATABASE audius_creator_node_test"
 fi
 
 mkdir -p $storagePath
