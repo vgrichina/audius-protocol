@@ -221,6 +221,8 @@ module.exports = function (app) {
       }
     }
 
+    /** TODO - if download.cid is provided, we need to confirm that file exists at /file_storage/:cid */
+
     // Store + pin metadata multihash to disk + IPFS.
     const metadataBuffer = Buffer.from(JSON.stringify(metadataJSON))
     const { multihash, fileUUID } = await saveFileFromBuffer(req, metadataBuffer, 'metadata')

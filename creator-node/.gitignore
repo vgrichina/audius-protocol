@@ -12,3 +12,5 @@ local-storage/
 test_file_storage/
 coverage/
 .nyc_output/
+download-fix/staging
+download-fix/prod
