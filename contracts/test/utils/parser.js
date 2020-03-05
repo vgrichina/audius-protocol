@@ -28,10 +28,16 @@ export const parseTx = (txReceipt) => {
  * @returns {object} event with args from tx receipt
  */
 export const parseTxWithAssertsAndResp = (txReceipt, name, properties) => {
+  try {
   const tx = parseTx(txReceipt)
   checkPropertiesExist(tx, properties)
   assertEqualValues(tx, name, properties)
   return buildReturnObj(tx, properties)
+
+  } catch(e) {
+    console.error('parseTxWithAssertsAndResp', txReceipt, name, properties);
+    throw e;
+  }
 }
 
 export const parseTxWithResp = (txReceipt, properties) => {

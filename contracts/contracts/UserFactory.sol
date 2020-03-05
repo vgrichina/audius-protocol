@@ -104,7 +104,13 @@ contract UserFactory is RegistryContract, SigningLogic {
             _owner == recoverSigner(_signatureDigest, _subjectSig),
             "Invalid signature for given user"
         );
+        // TODO: NOTE: Uncomment following and it fails with non-empty userStorageRegistryKey
+        // require(1 == 2, string(abi.encodePacked(
+        //     "addUser1.userStorageRegistryKey:", userStorageRegistryKey, ":", verifierAddress)));
         burnSignatureDigest(_signatureDigest, _owner);
+        // NOTE: This fails with empty userStorageRegistryKey
+        require(1 == 2, string(abi.encodePacked(
+            "addUser2.userStorageRegistryKey:", userStorageRegistryKey, ":", verifierAddress)));
 
         // ensure handle is valid and available
         bytes16 handleLower = toLower(_handle);
