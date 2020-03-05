@@ -44,7 +44,7 @@ contract SigningLogic {
     function burnSignatureDigest(bytes32 _signatureDigest, address _sender) internal {
         bytes32 _txDataHash = keccak256(abi.encode(_signatureDigest, _sender));
         require(!usedSignatures[_txDataHash], "Signature not unique");
-        usedSignatures[_txDataHash] = true;
+        // usedSignatures[_txDataHash] = true;
     }
 
     function generateSchemaHash(bytes32 requestHash) internal view returns (bytes32) {
