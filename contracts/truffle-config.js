@@ -17,10 +17,31 @@ require('babel-register')({
 
 require('babel-polyfill')
 
+const { NearProvider, nearlib } = require('near-web3-provider');
+const web3 = require('web3');
+
+// Configuration for NEAR TestNet.
+ACCOUNT_ID = 'vg-evm'
+const fileKeyStore = new nearlib.keyStores.UnencryptedFileSystemKeyStore('neardev');
+const networkId = 'default';
+const defaultAccount = web3.utils.keccak256(ACCOUNT_ID).slice(26, 66);
+
 module.exports = {
   // See <http://truffleframework.com/docs/advanced/configuration>
   // to customize your Truffle configuration!
   networks: {
+    near: {
+      network_id: '99',
+      provider: function() {
+          return new NearProvider(
+              // 'https://rpc.nearprotocol.com',
+              'http://localhost:3030',
+              fileKeyStore, ACCOUNT_ID, networkId, 'vg-evm');
+      },
+      from: defaultAccount,
+      skipDryRun: true
+    },
+
     development: {
       host: '127.0.0.1',
       port: 8545,

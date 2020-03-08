@@ -2,6 +2,7 @@ pragma solidity ^0.5.0;
 
 import "openzeppelin-solidity/contracts/cryptography/ECDSA.sol";
 
+import "solidity-bytes-utils/contracts/BytesLib.sol";
 
 /**
 * @title SigningLogic is contract implementing signature recovery from typed data signatures
@@ -9,6 +10,8 @@ import "openzeppelin-solidity/contracts/cryptography/ECDSA.sol";
 * @dev This contract is inherited by other contracts.
 */
 contract SigningLogic {
+
+    using BytesLib for bytes;
 
     bytes32 constant EIP712DOMAIN_TYPEHASH = keccak256(
         "EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)"
@@ -41,7 +44,7 @@ contract SigningLogic {
     function burnSignatureDigest(bytes32 _signatureDigest, address _sender) internal {
         bytes32 _txDataHash = keccak256(abi.encode(_signatureDigest, _sender));
         require(!usedSignatures[_txDataHash], "Signature not unique");
-        usedSignatures[_txDataHash] = true;
+        // usedSignatures[_txDataHash] = true;
     }
 
     function generateSchemaHash(bytes32 requestHash) internal view returns (bytes32) {
@@ -49,7 +52,10 @@ contract SigningLogic {
     }
 
     function recoverSigner(bytes32 _hash, bytes memory _sig) internal pure returns (address) {
-        address signer = ECDSA.recover(_hash, _sig);
+        // TODO: Non-fake solution that verifies signature
+        //address signer = ECDSA.recover(_hash, _sig);
+        address signer = _sig.toAddress(0);
+
         require(signer != address(0), "Signer cannot be contract creation address");
         return signer;
     }

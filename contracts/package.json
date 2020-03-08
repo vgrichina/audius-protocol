@@ -32,19 +32,21 @@
     "bs58": "^4.0.1",
     "ethlint": "^1.2.3",
     "fs-extra": "^7.0.0",
+    "near-web3-provider": "../../near-web3-provider",
     "openzeppelin-solidity": "^2.1.0",
+    "solidity-bytes-utils": "^0.0.8",
     "truffle": "5.0.42"
   },
   "devDependencies": {
     "async": "^2.6.1",
     "babel-register": "^6.26.0",
     "chance": "^1.0.18",
-    "standard": "^12.0.1",
-    "ipfs-api": "^24.0.1"
+    "ipfs-api": "^24.0.1",
+    "standard": "^12.0.1"
   },
   "engines": {
-    "node": "10.4.1",
-    "npm": "6.1.0"
+    "node": ">=10.4.1",
+    "npm": "^6.1.0"
   },
   "standard": {
     "globals": [

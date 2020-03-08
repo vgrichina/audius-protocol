@@ -1,6 +1,11 @@
 // config values stored by network name. see truffle-config.json for a mapping from network
 // name to other params
 module.exports = {
+  'near': {
+    verifierAddress: '0xbbbb93A6B3A1D6fDd27909729b95CCB0cc9002C0',
+    blacklisterAddress: '0xcccc36bE44D106C6aC14199A2Ed6a29fDa25d5Ae'
+  },
+
   'development': {
     verifierAddress: '0xbbbb93A6B3A1D6fDd27909729b95CCB0cc9002C0',
     blacklisterAddress: '0xcccc36bE44D106C6aC14199A2Ed6a29fDa25d5Ae'
